@@ -440,3 +440,152 @@ using namespace std;
 //     }
 //     cout<<"Longest Substring without repeating characters with length: "<<maxLen<<" "<<str.substr(maxStart,maxLen);
 // }
+
+// LinkedList
+struct Node{
+    int data;
+    Node *next;
+};
+
+// // Traverse Linked List
+void printNode(Node *head){
+    Node *temp=head;
+    while(temp!=nullptr){
+        cout<<temp->data<<"->";
+        temp=temp->next;
+    }
+    cout<<"NULL\n";
+}
+
+void createNode(Node *&temp,Node *&head,Node *&newNode){
+    int choice=1;
+    while(choice){
+        newNode=new Node();
+        cout<<"Enter data: ";
+        cin>>newNode->data;
+        newNode->next=nullptr;
+        if(head==nullptr) head=temp=newNode;
+        else{
+            temp->next=newNode;
+            temp=newNode;
+        }
+        cout<<"Do you want to continue(1/0): ";
+        cin>>choice;
+    }
+    printNode(head);
+}
+
+// Insert at Beginning
+void insertAtBegin(Node *&head){
+    Node *newNode;
+    newNode=new Node();
+    cout<<"Enter Data to insert at beginning: ";
+    cin>>newNode->data;
+    newNode->next=head;
+    head=newNode;
+    printNode(head);
+}
+
+// Insert at End
+void insertAtEnd(Node *head){
+    Node *newNode;
+    Node *temp=head;
+    newNode=new Node();
+    cout<<"Enter Node to add at last: ";
+    cin>>newNode->data;
+    while(temp->next!=nullptr) temp=temp->next;
+    temp->next=newNode;
+    temp=temp->next;
+    temp->next=nullptr;
+    printNode(head);
+}
+
+// Reverse Linked List
+void reverseLL(Node *&head){
+    Node *temp1,*temp2;
+    temp1=head;
+    temp2=head->next;
+    temp1->next=nullptr;
+    while(temp2!=nullptr){
+        head=temp2;
+        temp2=temp2->next;
+        head->next=temp1;
+        temp1=head;
+    }
+}
+
+// Middle of Linked List
+int lenll(Node *head){
+    Node *temp=head;
+    int len=0;
+    while(temp!=nullptr){
+        len++;
+        temp=temp->next;
+    }
+    return len;
+}
+
+int midele(Node *head){
+    Node *temp;
+    int len=lenll(head);
+    int i=0;
+    while(i!=(len/2)-1){
+        i++;
+        temp=temp->next;
+    }
+    temp=temp->next;
+    return temp->data;
+}
+
+// Detect Cycle in Linked List
+void createcycle(Node *&head){
+    Node *temp=nullptr;
+    Node *newNode=nullptr;
+    int choice=1;
+    while(choice){
+        newNode=new Node();
+        cout<<"Enter Element: ";
+        cin>>newNode->data;
+        if(head==nullptr) temp=head=newNode;
+        else{
+            temp->next=newNode;
+            temp=newNode;
+        }
+        cout<<"Do you want to add more Node (0/1): ";
+        cin>>choice;
+    }
+    temp->next=head;
+}
+
+bool detectcycle(Node *head){
+    Node *slow=head;
+    Node *fast=head;
+    while(fast!=nullptr && fast->next!=nullptr){
+        slow=slow->next;
+        fast=fast->next->next;
+        if(slow==fast) return true;
+    }
+    return false;
+}
+
+int main(){
+    Node *temp=nullptr, *head=nullptr, *newNode=nullptr;
+    createNode(temp,head,newNode);
+    // temp=head;
+    // insertAtBegin(head);
+    // insertAtEnd(head);
+    // reverseLL(head);
+    // printNode(head);
+    // cout<<"Middle Element: "<<midele(head);
+    // createcycle(head);
+    if(detectcycle(head)==true) cout<<"Cycle exists!!";
+    else{
+        cout<<"Cycle doesn't exists\n";
+        printNode(head);
+    }
+    return 0;
+}
+
+
+
+
