@@ -442,12 +442,13 @@ using namespace std;
 // }
 
 // LinkedList
+
 struct Node{
     int data;
     Node *next;
 };
 
-// // Traverse Linked List
+// Traverse Linked List
 void printNode(Node *head){
     Node *temp=head;
     while(temp!=nullptr){
@@ -568,24 +569,77 @@ bool detectcycle(Node *head){
     return false;
 }
 
-int main(){
-    Node *temp=nullptr, *head=nullptr, *newNode=nullptr;
-    createNode(temp,head,newNode);
-    // temp=head;
-    // insertAtBegin(head);
-    // insertAtEnd(head);
-    // reverseLL(head);
-    // printNode(head);
-    // cout<<"Middle Element: "<<midele(head);
-    // createcycle(head);
-    if(detectcycle(head)==true) cout<<"Cycle exists!!";
-    else{
-        cout<<"Cycle doesn't exists\n";
-        printNode(head);
-    }
-    return 0;
+// All functions together - linked list
+// int main(){
+//     Node *temp=nullptr, *head=nullptr, *newNode=nullptr;
+//     createNode(temp,head,newNode);
+//     // temp=head;
+//     // insertAtBegin(head);
+//     // insertAtEnd(head);
+//     // reverseLL(head);
+//     // printNode(head);
+//     // cout<<"Middle Element: "<<midele(head);
+//     // createcycle(head);
+//     if(detectcycle(head)==true) cout<<"Cycle exists!!";
+//     else{
+//         cout<<"Cycle doesn't exists\n";
+//         printNode(head);
+//     }
+//     return 0;
+// }
+
+
+// Bit Manipulation
+
+// Check Odd/Even Using Bitwise
+int checkevenodd(int digit){
+    // // int a=digit>>1;
+    // // int b=a<<1;
+    // // if(digit==b) return 0;
+    // // else return 1;
+    // return digit&1;
 }
 
+// Count Set Bits
+int countsetbits(int digit){
+    int cnt=0;
+    // while (digit>=1){
+    //     if(digit%2==1) cnt++;
+    //     digit/=2;
+    // }
+    int a=digit;
+    while(a!=0){                            // Brian Kernighan's Algorithm
+        a=a & (a-1);
+        cnt++; 
+    }
+    return cnt;
 
+}
 
+// Power of Two
+int po2(int power){
+    return 1<<power;
+}
+
+// Single Number (all elements twice except one)
+int singlenumber(vector<int>arr){
+    int xorsum=0;
+    for(int i=0;i<arr.size();i++) xorsum^=arr[i];
+    return xorsum;
+}
+
+// int main(){
+//     // int dig;
+//     // cout<<"Enter Digit: ";cin>>dig;
+//     // if(checkevenodd(dig)==0) cout<<dig<<" is even";
+//     // else cout<<dig<<" is odd";
+//     // cout<<"No of set bits: "<<countsetbits(dig);
+//     // cout<<"Power of two: "<<po2(dig);
+//     // int n;
+//     // cout<<"Enter number of elements: ";cin>>n;
+//     // vector<int>arr(n);
+//     // cout<<"Enter Elements: ";
+//     // for(int i=0;i<n;i++) cin>>arr[i];
+//     // cout<<"Single Number: "<<singlenumber(arr);
+// }
 
