@@ -643,3 +643,94 @@ int singlenumber(vector<int>arr){
 //     // cout<<"Single Number: "<<singlenumber(arr);
 // }
 
+// // Sorting Techniques
+
+// Bubble Sort
+void bubblesorted(vector<int>&arr){
+    for(int i=0;i<arr.size();i++){
+        bool check=false;
+        for (int j=0;j<arr.size()-1;j++){
+            if(arr[j]>arr[j+1]){
+                swap(arr[j],arr[j+1]);
+                check=true;
+            }
+        }
+        if (!check)return;
+    }
+}
+
+// Selection Sort
+void selectionsorted(vector<int>&arr){
+    int left=0;
+    int right=0;
+    int min_idx;
+    for(int i=0;i<arr.size()-1;i++){
+        min_idx=i;
+        for (int j=i+1;j<arr.size();j++){
+            if(arr[j]<arr[min_idx]) min_idx=j;
+        }
+        swap(arr[i],arr[min_idx]);
+    }
+}
+
+// Insertion Sort
+void insertionsorted(vector<int>&arr){
+    for(int i=1;i<arr.size();i++){
+        int key=arr[i];
+        int j=i-1;
+        while(j>=0 && arr[j]>key){
+            arr[j+1]=arr[j];
+            j=j-1;
+        }
+        arr[j+1]=key;
+    }
+}
+
+// Merge Sort
+void merger(vector<int>&arr,int left,int mid,int right){
+    int n1=mid-left+1;
+    int n2=right-mid;
+    vector<int>l(n1),r(n2);
+    for(int i=0;i<n1;i++) l[i]=arr[left+i];
+    for(int i=0;i<n2;i++) r[i]=arr[mid+i+1];
+    int i=0,j=0,k=left;
+    while(i<n1 && j<n2){
+        if(l[i]<r[j]){
+            arr[k]=l[i];
+            i++;
+        }else{
+            arr[k]=r[j];
+            j++;
+        }
+        k++;
+    }
+    while(i<n1){
+        arr[k]=l[i];
+        k++;i++;
+    }
+    while(j<n2){
+        arr[k]=r[j];
+        k++;j++;
+    }
+}
+void mergesorted(vector<int>&arr,int left,int right){
+    if (left>=right)return;
+    int mid=left+(right-left)/2;
+    mergesorted(arr,left,mid);
+    mergesorted(arr,mid+1,right);
+    merger(arr,left,mid,right);
+}
+
+int main(){
+    int n;
+    cout<<"Enter Number of elements: ";cin>>n;
+    vector<int>arr(n);
+    cout<<"Enter elements: ";
+    for (int i=0;i<n;i++) cin>>arr[i];
+    // bubblesorted(arr);
+    // selectionsorted(arr);
+    // insertionsorted(arr);
+    mergesorted(arr,0,n-1);
+    cout<<"Sorted Array: ";
+    for(int a:arr)cout<<a<<" ";
+}
