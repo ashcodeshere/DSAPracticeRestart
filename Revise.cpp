@@ -713,6 +713,7 @@ void merger(vector<int>&arr,int left,int mid,int right){
         k++;j++;
     }
 }
+
 void mergesorted(vector<int>&arr,int left,int right){
     if (left>=right)return;
     int mid=left+(right-left)/2;
@@ -721,16 +722,61 @@ void mergesorted(vector<int>&arr,int left,int right){
     merger(arr,left,mid,right);
 }
 
+// int main(){
+//     int n;
+//     cout<<"Enter Number of elements: ";cin>>n;
+//     vector<int>arr(n);
+//     cout<<"Enter elements: ";
+//     for (int i=0;i<n;i++) cin>>arr[i];
+//     // bubblesorted(arr);
+//     // selectionsorted(arr);
+//     // insertionsorted(arr);
+//     // mergesorted(arr,0,n-1);
+//     cout<<"Sorted Array: ";
+//     for(int a:arr)cout<<a<<" ";
+// }
+
+// // Pattern Questions
+
+// Right Triangle Star Pattern
+void righttristar(int n){
+    for(int j=1;j<n+1;j++){
+        for(int i=0;i<j;i++){
+            cout<<"*";
+        }
+        cout<<endl;
+    }
+}
+
+// Pyramid Pattern
+void pyramidpat(int n){
+    for(int i=1;i<n+1;i++){
+        for(int j=1;j<=n-i;j++) cout<<" ";
+        for(int k=1;k<=2*i-1;k++) cout<<"*";
+        cout<<endl;
+    }
+}
+
+// Diamond Pattern
+void diamondpat(int n){
+    for(int i=1;i<=n;i++){
+        for(int j=1;j<=n-i;j++) cout<<" ";
+        for(int k=1;k<=2*i-1;k++) cout<<"*";
+        cout<<endl;
+    }
+    for(int i=n-1;i>=1;i--){
+        for(int j=1;j<=n-i;j++) cout<<" ";
+        for(int k=1;k<=2*i-1;k++) cout<<"*";
+        cout<<endl;
+    }
+}
+
 int main(){
     int n;
-    cout<<"Enter Number of elements: ";cin>>n;
-    vector<int>arr(n);
-    cout<<"Enter elements: ";
-    for (int i=0;i<n;i++) cin>>arr[i];
-    // bubblesorted(arr);
-    // selectionsorted(arr);
-    // insertionsorted(arr);
-    mergesorted(arr,0,n-1);
-    cout<<"Sorted Array: ";
-    for(int a:arr)cout<<a<<" ";
+    cout<<"Enter number: ";cin>>n;
+    righttristar(n);
+    cout<<endl;
+    pyramidpat(n);
+    cout<<endl;
+    diamondpat(n);
 }
