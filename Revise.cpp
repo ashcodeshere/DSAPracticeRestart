@@ -771,12 +771,82 @@ void diamondpat(int n){
     }
 }
 
-int main(){
-    int n;
-    cout<<"Enter number: ";cin>>n;
-    righttristar(n);
-    cout<<endl;
-    pyramidpat(n);
-    cout<<endl;
-    diamondpat(n);
+// int main(){
+//     int n;
+//     cout<<"Enter number: ";cin>>n;
+//     righttristar(n);
+//     cout<<endl;
+//     pyramidpat(n);
+//     cout<<endl;
+//     diamondpat(n);
+// }
+
+// // Subarray Problems
+
+// Maximum Subarray Sum (Kadane's Algorithm)
+int kadanealgo(vector<int>arr){
+    int currsum=arr[0];
+    int maxsum=arr[0];
+    for(int i=0;i<arr.size();i++){
+        currsum=max(arr[i],currsum+arr[i]);
+        maxsum=max(currsum,maxsum);
+    }
+    return maxsum;
 }
+
+// Subarray Sum Equals K
+pair<int,int> checksum(vector<int>&arr,int target){
+    int currsum=0,left=0;
+    for(int right=0;right<arr.size();right++){
+        currsum+=arr[right];
+        while(currsum>target && left<=right){
+            currsum-=arr[left];
+            left++;
+        }
+        if(currsum==target) return {left,right};
+    }
+    return {-1,-1};
+}
+
+// Longest Subarray with Sum K
+pair<int,int> longSubwithK(vector<int>arr,int target){
+    unordered_map<int,int>mp;
+    mp[0]=-1;
+    int prefix=0,maxlen=0,start=-1,end=-1;
+    for(int i=0;i<arr.size();i++){
+        prefix+=arr[i];
+        if(mp.count(prefix-target)){
+            int len=i-mp[prefix-target];
+            if(len>maxlen){
+                maxlen=len;
+                start=mp[prefix-target]+1;
+                end=i;
+            }
+        }
+        if(!mp.count(prefix))mp[prefix]=i;
+    }
+    return {start,end};
+}
+
+// Maximum Sum Circular Subarray
+// --------Will do later after studying
+// Count Number of Subarrays with Given Sum
+// --------Will do later after studying
+
+// int main(){
+//     int n,target;
+//     cout<<"Enter number of elements in array:";cin>>n;
+//     vector<int>arr(n);
+//     cout<<"Enter Elements: ";
+//     for(int i=0;i<n;i++) cin>>arr[i];
+//     // cout<<"Maximum Sum: "<<kadanealgo(arr);
+//     cout<<"Enter Target: ";cin>>target;
+//     // pair<int,int>idx=checksum(arr,target);
+//     // pair<int,int>idx=longSubwithK(arr,target);
+//     // if(idx.first==-1) cout<<"No subarray Found!!";
+//     // else{
+//     //     for(int i=idx.first;i<=idx.second;i++) cout<<arr[i]<<" ";
+//     //     cout<<"\n";
+//     // }
+// }
+
